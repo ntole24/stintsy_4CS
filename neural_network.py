@@ -31,10 +31,10 @@ class NeuralNetwork(nn.Module):
         self.layers = nn.Sequential(*layers)
 
     def init_weights(self):
-        torch.manual_seed(2)
+        gen = torch.manual_seed(2)
         for module in self.modules():
             if isinstance(module, nn.Linear):
-                nn.init.normal_(module.weight, mean=0, std=0.1)
+                nn.init.normal_(module.weight, mean=0, std=0.1, generator=gen)
                 nn.init.constant_(module.bias, 0)
 
     def get_activation(self, mode='relu'):
